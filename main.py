@@ -1,9 +1,14 @@
 import asyncio
 from pathlib import Path
+import logging
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message
 from aiogram.filters import Command
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+)
 
 def read_token(path: str | Path) -> str:
     path = Path(path)
@@ -18,6 +23,7 @@ def read_token(path: str | Path) -> str:
 
     return token
 
+logging.basicConfig(level=logging.INFO)
 BOT_TOKEN = read_token("bot_token.txt")
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
@@ -29,6 +35,7 @@ async def handle_start(message: Message):
     await message.answer("Hello!")
 
 async def main():
+    logging.info("Bot started")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
