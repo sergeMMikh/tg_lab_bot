@@ -1,8 +1,9 @@
 import asyncio
 from pathlib import Path
 import logging
+import json
 from aiogram import Bot, Dispatcher
-from aiogram.types import Message
+from aiogram.types import Message, Update
 from aiogram.filters import Command
 
 logging.basicConfig(
@@ -33,6 +34,29 @@ dp = Dispatcher()
 @dp.message(Command("start"))
 async def handle_start(message: Message):
     await message.answer("Hello!")
+
+async def handler(event: dict, context):
+    body: str = event ["body"]
+
+    update_data = json.loads(body) if body else {}
+
+    await dp.feed_update(
+        bot,
+        Update.model_validate(update_data)
+    )
+
+    return {"statusCode": 200, 
+            "body": ""}
+
+@dp.message()
+async def catch_all(message: Message):
+    logging.info(
+        "Got message: chat_id=%s type=%s text=%r",
+        message.chat.id,
+        message.content_type,
+        message.text,
+    )
+    await message.answer("Got it. Type /start")
 
 async def main():
     logging.info("Bot started")
