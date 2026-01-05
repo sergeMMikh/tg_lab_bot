@@ -1,0 +1,49 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# ===== Virtual environments =====
+venv/
+.env/
+.env.*
+
+# ===== Secrets =====
+bot_token.txt
+*.env
+*.secret
+*.key
+
+# ===== IDE / Editors =====
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ===== OS =====
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# ===== Logs =====
+*.log
+
+# ===== Tests / coverage =====
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ===== Local configs =====
+config.local.py
