@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 def read_token(path: str | Path) -> str:
     path = Path(path)
 
