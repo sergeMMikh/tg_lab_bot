@@ -35,3 +35,12 @@ def read_env_var(name: str, env_path: str | Path = ".env") -> str:
         return value
 
     raise KeyError(f"{name} not found in {path}")
+
+
+def read_env_var_optional(
+    name: str, default: str | None = None, env_path: str | Path = ".env"
+) -> str | None:
+    try:
+        return read_env_var(name, env_path=env_path)
+    except (KeyError, FileNotFoundError):
+        return default
